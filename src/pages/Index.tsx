@@ -1,13 +1,46 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import ZombieGameMenu from "@/components/ZombieGameMenu";
+import GameInterface from "@/components/GameInterface";
+
+type GameState = "menu" | "playing" | "shop" | "inventory" | "stats";
 
 const Index = () => {
+  const [gameState, setGameState] = useState<GameState>("menu");
+
+  const handleStartGame = () => {
+    setGameState("playing");
+  };
+
+  const handleOpenShop = () => {
+    // Placeholder for shop functionality
+    alert("Магазин будет доступен в следующей версии!");
+  };
+
+  const handleOpenInventory = () => {
+    // Placeholder for inventory functionality
+    alert("Инвентарь будет доступен в следующей версии!");
+  };
+
+  const handleOpenStats = () => {
+    // Placeholder for stats functionality
+    alert("Статистика будет доступна в следующей версии!");
+  };
+
+  const handleBackToMenu = () => {
+    setGameState("menu");
+  };
+
+  if (gameState === "playing") {
+    return <GameInterface onBackToMenu={handleBackToMenu} />;
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4 color-black text-black">Добро пожаловать!</h1>
-        <p className="text-xl text-gray-600">тут будет отображаться ваш проект</p>
-      </div>
-    </div>
+    <ZombieGameMenu
+      onStartGame={handleStartGame}
+      onOpenShop={handleOpenShop}
+      onOpenInventory={handleOpenInventory}
+      onOpenStats={handleOpenStats}
+    />
   );
 };
 
