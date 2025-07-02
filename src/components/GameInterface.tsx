@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import Icon from "@/components/ui/icon";
+import Game3D from "@/components/Game3D";
 
 interface GameStats {
   health: number;
@@ -146,21 +147,32 @@ const GameInterface = ({ onBackToMenu }: GameInterfaceProps) => {
         </div>
       </div>
 
-      {/* Central Game Area */}
-      <div className="relative z-10 flex-1 flex items-center justify-center p-8">
-        <Card className="bg-black/40 border-gray-500/30 p-8 text-center">
-          <h2 className="text-4xl font-bold text-white mb-4">ИГРОВАЯ ЗОНА</h2>
-          <p className="text-xl text-gray-300 mb-6">
-            Здесь будет происходить сражение с зомби
-          </p>
-          <div className="text-6xl mb-4">🧟‍♂️</div>
-          <p className="text-gray-400">
-            Убито зомби:{" "}
-            <span className="text-red-400 font-bold">
-              {gameStats.zombiesKilled}
-            </span>
-          </p>
-        </Card>
+      {/* Central Game Area - 3D World */}
+      <div className="relative z-10 flex-1">
+        <Game3D isNight={isNightMode} />
+
+        {/* Game Stats Overlay */}
+        <div className="absolute bottom-20 left-4 z-30">
+          <Card className="bg-black/60 border-gray-500/30 p-3">
+            <p className="text-white text-sm">
+              Убито зомби:{" "}
+              <span className="text-red-400 font-bold">
+                {gameStats.zombiesKilled}
+              </span>
+            </p>
+          </Card>
+        </div>
+
+        {/* Controls Help */}
+        <div className="absolute top-20 right-4 z-30">
+          <Card className="bg-black/60 border-gray-500/30 p-3">
+            <div className="text-white text-xs space-y-1">
+              <p>🖱️ Вращение камеры</p>
+              <p>⚙️ Колесо - приближение</p>
+              <p>🎯 ПКМ - перемещение</p>
+            </div>
+          </Card>
+        </div>
       </div>
 
       {/* Bottom HUD - Weapon Selection */}
